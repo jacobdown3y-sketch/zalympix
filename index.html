@@ -315,6 +315,45 @@ main{position:relative;z-index:1}
 .quote p{font-size:16px;line-height:1.5}
 .quote .src{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:16px}
 
+/* ====================== MEDIA ====================== */
+.media{position:relative;overflow:hidden}
+.perf{text-align:center;margin-bottom:48px}
+.perf-lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ash-dim);display:block;margin-bottom:16px}
+.perf-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 12px}
+.perf-chip{font-family:var(--font-disp);text-transform:uppercase;font-size:clamp(15px,1.9vw,21px);letter-spacing:.04em;color:var(--fog);padding:6px 15px;border:1px solid var(--line);border-radius:100px;transition:.3s}
+.perf-chip:hover{border-color:var(--gold);color:var(--gold-bright);transform:translateY(-2px)}
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.vid{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000;cursor:pointer;aspect-ratio:16/9;transition:border-color .35s,transform .35s var(--ease),box-shadow .35s}
+.vid:hover{border-color:var(--line-gold);transform:translateY(-5px);box-shadow:0 26px 60px rgba(0,0,0,.5)}
+.vid .thumb{width:100%;height:100%;object-fit:cover;opacity:.8;transition:opacity .35s,transform .6s var(--ease)}
+.vid:hover .thumb{opacity:1;transform:scale(1.05)}
+.vid .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:62px;height:62px;border-radius:50%;background:var(--gold-grad);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .3s var(--ease)}
+.vid:hover .play{transform:translate(-50%,-50%) scale(1.1)}
+.vid .play svg{width:22px;height:22px;margin-left:3px;color:#241a04}
+.vid .vmeta{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 15px;background:linear-gradient(transparent,rgba(6,5,9,.94));pointer-events:none}
+.vid .vt{font-family:var(--font-disp);text-transform:uppercase;font-size:17px;line-height:1.06}
+.vid .vm{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-top:5px}
+.vid.playing{cursor:default}
+.vid.playing .thumb,.vid.playing .play,.vid.playing .vmeta{display:none}
+.vid iframe{width:100%;height:100%;border:0;display:block}
+.media-subhead{text-align:center;margin:64px 0 8px}
+.press-wall{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.pw{display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,var(--graphite),var(--onyx));padding:22px 20px;transition:border-color .35s,transform .35s var(--ease)}
+.pw:hover{border-color:var(--line-gold);transform:translateY(-4px)}
+.pw .qm{font-family:var(--font-disp);font-size:34px;line-height:.6;color:var(--gold-deep);opacity:.6}
+.pw .q{font-size:14.5px;line-height:1.5;color:var(--fog);margin-top:6px}
+.pw .o{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.pw .o .arw{opacity:.55;transition:transform .3s var(--ease)}
+.pw:hover .o .arw{transform:translate(2px,-2px)}
+.media-cta{margin-top:58px;border:1px solid var(--line-gold);border-radius:16px;padding:clamp(30px,4vw,48px);background:linear-gradient(160deg,var(--graphite-2),var(--void-2));display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;position:relative;overflow:hidden}
+.media-cta .mc-ic{width:54px;height:54px;color:var(--gold);flex:0 0 54px}
+.media-cta .mc-txt{flex:1;min-width:260px}
+.media-cta h3{font-family:var(--font-disp);text-transform:uppercase;font-size:clamp(26px,3.4vw,40px);line-height:.95}
+.media-cta p{color:var(--ash);max-width:440px;margin-top:10px;font-size:15px}
+.media-cta .btns{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:900px){.video-grid{grid-template-columns:repeat(2,1fr)}.press-wall{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.video-grid{grid-template-columns:1fr}.press-wall{grid-template-columns:1fr}}
+
 /* ====================== FINAL CTA ====================== */
 .final{position:relative;text-align:center;overflow:hidden;padding:clamp(90px,13vw,180px) 0}
 .final .hero-glow{top:auto;bottom:-30%}
@@ -430,6 +469,7 @@ main{position:relative;z-index:1}
       <li><a href="#format">Format</a></li>
       <li><a href="#event">2026 Event</a></li>
       <li><a href="#champions">Champions</a></li>
+      <li><a href="#media">Media</a></li>
       <li><a href="#sponsors">Sponsors</a></li>
       <li><a href="#enter" class="btn btn-gold"><svg width="15" height="15"><use href="#i-leaf"/></svg>Enter 2027</a></li>
     </ul>
@@ -740,21 +780,50 @@ main{position:relative;z-index:1}
   <div class="sp-rows reveal" id="sprows"></div>
 </section>
 
-<!-- ===================== ZNN / PRESS ===================== -->
-<section class="section" style="padding-top:0">
+<!-- ===================== MEDIA ===================== -->
+<section class="section media" id="media">
+  <div class="hero-glow" aria-hidden="true" style="opacity:.4;top:auto;bottom:-20%"></div>
   <div class="wrap">
-    <div class="press-grid">
-      <div class="znn reveal">
-        <div class="hero-glow" style="opacity:.35;top:auto;bottom:-40%" aria-hidden="true"></div>
-        <svg class="ic"><use href="#i-broadcast"/></svg>
-        <h3 class="chrome">Zalympix<br>News Network</h3>
-        <p>The ZNN takes the culture beyond the ceremony — grower interviews, brand deep-dives and behind-the-scenes coverage from every corner of the Zalympix world, all season long.</p>
-        <a href="#enter" class="btn btn-ghost"><svg width="15" height="15"><use href="#i-broadcast"/></svg>Tune In</a>
+    <div class="section-head reveal">
+      <span class="eyebrow center">ZNN · Zalympix News Network</span>
+      <h2 class="section-title chrome" style="margin-top:18px">The Media Vault</h2>
+      <p class="section-sub">Event recaps, judge-kit unboxings, grower interviews and competition films — plus what the press is saying. And yes, it's <b style="color:var(--gold-bright)">&ldquo;zah&rdquo;-lympix</b>, not &ldquo;zay.&rdquo;</p>
+    </div>
+
+    <div class="perf reveal">
+      <span class="perf-lbl">The stage has hosted</span>
+      <div class="perf-row">
+        <span class="perf-chip">Gucci Mane</span>
+        <span class="perf-chip">E-40</span>
+        <span class="perf-chip">Berner</span>
+        <span class="perf-chip">Shoreline Mafia</span>
+        <span class="perf-chip">Xzibit</span>
+        <span class="perf-chip">Yukmouth</span>
+        <span class="perf-chip">Curren$y</span>
+        <span class="perf-chip">Demrick</span>
+        <span class="perf-chip">LaRussell</span>
+        <span class="perf-chip">Yung Chowder</span>
       </div>
-      <div class="press-quotes">
-        <div class="quote reveal d1"><p>"Basically the world championship of weed — but with a stacked rap lineup."</p><div class="src">— Vice</div></div>
-        <div class="quote reveal d2"><p>"The brands that stood out most were not necessarily the loudest."</p><div class="src">— Respect My Region · 2026 Recap</div></div>
-        <div class="quote reveal d3"><p>"Gucci Mane, LaRussell and E-40 headline the industry's most esteemed weed event."</p><div class="src">— GreenState</div></div>
+    </div>
+
+    <div class="video-grid reveal" id="videogrid"></div>
+
+    <div class="media-subhead reveal">
+      <span class="eyebrow center">As Seen In</span>
+      <h3 class="disp chrome" style="font-size:clamp(30px,4.5vw,52px);text-transform:uppercase;margin-top:16px">The Press Room</h3>
+    </div>
+    <div class="press-wall reveal" id="presswall"></div>
+
+    <div class="media-cta reveal">
+      <div class="hero-glow" style="opacity:.3;top:auto;bottom:-50%" aria-hidden="true"></div>
+      <svg class="mc-ic"><use href="#i-broadcast"/></svg>
+      <div class="mc-txt">
+        <h3 class="chrome">Follow the Movement</h3>
+        <p>New drops from the Zalympix News Network all season — recaps, interviews and behind-the-scenes from every region. Tap in.</p>
+      </div>
+      <div class="btns">
+        <a href="https://www.youtube.com/hashtag/zalympix" target="_blank" rel="noopener" class="btn btn-gold"><svg width="15" height="15"><use href="#i-broadcast"/></svg>Watch on YouTube</a>
+        <a href="https://x.com/zalympix" target="_blank" rel="noopener" class="btn btn-ghost"><svg width="15" height="15"><use href="#i-x"/></svg>@zalympix</a>
       </div>
     </div>
   </div>
@@ -791,6 +860,7 @@ main{position:relative;z-index:1}
         <a href="#about">What is Zalympix</a>
         <a href="#format">The Format</a>
         <a href="#champions">Hall of Champions</a>
+        <a href="#media">Media &amp; Press</a>
         <a href="#event">2026 Event</a>
       </div>
       <div class="foot-col">
@@ -1036,6 +1106,53 @@ main{position:relative;z-index:1}
   if(presRow){
     var pres=["Miron","Rare Candy Supply","My Butler AL","Zig-Zag"];
     presRow.innerHTML=pres.map(function(n,pi){return '<span class="p"><span class="bm">'+brandMark(n,pi,null)+'</span><span class="chrome">'+n+'</span></span>';}).join("");
+  }
+
+  /* ---------- MEDIA: video gallery (click-to-play facade) ---------- */
+  var vids=[
+    {id:"HNM-9xGxRK0",t:"Zalympix Los Angeles 2026 — Official Recap",m:"2026 California · Event Film"},
+    {id:"oFefHrCZ7sA",t:"Unboxing the Legendary Zalympix Box",m:"Winners Flight · 28 Elite Strains"},
+    {id:"PQK46pnaQaE",t:"Which Michigan Grow Wins 2025 Zalympix?",m:"Michigan · 28 Strains Head-to-Head"},
+    {id:"WAAwpbgzH6w",t:"Judging Rosin Like a Pro with Boris",m:"2025 · Solventless Insights"},
+    {id:"faxI36-iCx4",t:"Zalympix 2025 — Event Recap",m:"California · Recap"},
+    {id:"oa1e7UlwGY0",t:"The Judge Kit, Explained",m:"How the Judging Works"},
+    {id:"DrkHKrO8lsg",t:"Zalympix 2025",m:"Competition Film"},
+    {id:"VY1vaDUItMI",t:"Finding the Best Weed in the Industry",m:"Feature · CLtv"}
+  ];
+  var vg=document.getElementById("videogrid");
+  if(vg){
+    vg.innerHTML=vids.map(function(v){
+      return '<div class="vid" data-id="'+v.id+'" role="button" tabindex="0" aria-label="Play: '+v.t+'">'+
+        '<img class="thumb" loading="lazy" src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" alt="'+v.t+'">'+
+        '<span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>'+
+        '<div class="vmeta"><div class="vt">'+v.t+'</div><div class="vm">'+v.m+'</div></div></div>';
+    }).join("");
+    function playVid(card){
+      if(!card||card.classList.contains("playing"))return;
+      var id=card.getAttribute("data-id");card.classList.add("playing");
+      card.insertAdjacentHTML("beforeend",'<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1" title="Zalympix video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>');
+    }
+    vg.addEventListener("click",function(e){playVid(e.target.closest(".vid"));});
+    vg.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("vid")){e.preventDefault();playVid(e.target);}});
+  }
+
+  /* ---------- MEDIA: press wall (real, attributed coverage) ---------- */
+  var press=[
+    {o:"VICE",q:"Basically the world championship of weed — but with a stacked rap lineup.",u:"https://www.vice.com/en/via/zalympix-weed-event/"},
+    {o:"GreenState",q:"Gucci Mane and LaRussell headline the industry's most esteemed weed event.",u:"https://www.greenstate.com/lifestyle/zalympix-california-concert/"},
+    {o:"Respect My Region",q:"The brands that stood out most were not necessarily the loudest.",u:"https://respectmyregion.com/zalympix-2026-recap-e-40-shoreline-mafia/"},
+    {o:"Detroit Metro Times",q:"The ‘Grammys of weed’ showcases some of Michigan's best cannabis.",u:"https://www.metrotimes.com/weed-2/zalympix-the-grammys-of-weed-showcases-some-of-michigans-best-cannabis/"},
+    {o:"LA Weekly",q:"The Zalympix goes national.",u:"https://www.laweekly.com/the-zalympix-goes-national/"},
+    {o:"Beard Bros Pharms",q:"Five years deep — unveiling a major 2026 lineup across CA, MI & OK.",u:"https://beardbrospharms.com/articles/zalympix-celebrates-five-years-and-unveils-a-major-2026-lineup-across-ca-mi-ok/"},
+    {o:"Honeysuckle Mag",q:"Greenwolf's epic Zalympix.",u:"https://honeysucklemag.com/greenwolf-zalympix-los-angeles-gucci-mane-berner/"},
+    {o:"Black Cannabis Magazine",q:"Cannabis majesty — with Gucci Mane, Berner, Xzibit & Demrick.",u:"https://blackcannabismagazine.com/zalympix-2023-cannabis-majesty-with-gucci-mane-berner-xzibit-demrick/"}
+  ];
+  var pw=document.getElementById("presswall");
+  if(pw){
+    pw.innerHTML=press.map(function(p){
+      return '<a class="pw" href="'+p.u+'" target="_blank" rel="noopener"><div><div class="qm">“</div><div class="q">'+p.q+'</div></div>'+
+        '<div class="o"><span>'+p.o+'</span><span class="arw">↗</span></div></a>';
+    }).join("");
   }
 
   /* ---------- MARQUEE SEAMLESS (duplicate content) ---------- */
