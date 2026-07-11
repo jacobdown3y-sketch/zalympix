@@ -315,6 +315,51 @@ main{position:relative;z-index:1}
 .quote p{font-size:16px;line-height:1.5}
 .quote .src{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:16px}
 
+/* ====================== JUDGE KITS ====================== */
+.kits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.kit{position:relative;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--graphite),var(--onyx));padding:36px 34px;overflow:hidden;transition:border-color .4s,transform .4s var(--ease),box-shadow .4s}
+.kit::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 100% 0,rgba(233,196,106,.10),transparent 55%);opacity:0;transition:opacity .4s}
+.kit:hover{border-color:var(--line-gold);transform:translateY(-5px);box-shadow:0 30px 64px rgba(0,0,0,.5)}
+.kit:hover::before{opacity:1}
+.kit .kit-top{display:flex;align-items:center;gap:14px;margin-bottom:4px;position:relative}
+.kit .kit-ic{width:34px;height:34px;color:var(--gold);flex:0 0 34px}
+.kit .kit-name{font-family:var(--font-disp);text-transform:uppercase;font-size:clamp(28px,3.6vw,44px);line-height:.95}
+.kit .kit-amt{margin-left:auto;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#241a04;background:var(--gold-grad);padding:6px 12px;border-radius:100px;font-weight:700;white-space:nowrap}
+.kit .kit-desc{color:var(--ash);font-size:15px;margin:14px 0 22px;position:relative}
+.kit ul.kit-inc{display:grid;gap:12px;position:relative}
+.kit ul.kit-inc li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--fog)}
+.kit ul.kit-inc li svg{width:18px;height:18px;color:var(--gold);flex:0 0 18px;margin-top:2px}
+.kit ul.kit-inc li b{color:var(--gold-bright);font-weight:600}
+.kit .kit-foot{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;line-height:1.7;color:var(--ash-dim);position:relative}
+.tiers-lbl{text-align:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ash-dim);margin:44px 0 18px}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tier{border:1px solid var(--line);border-radius:13px;padding:26px 22px;text-align:center;background:var(--onyx);transition:border-color .35s,transform .35s var(--ease)}
+.tier:hover{border-color:var(--line-gold);transform:translateY(-4px)}
+.tier.vip{border-color:var(--line-gold);background:linear-gradient(180deg,rgba(233,196,106,.07),var(--onyx))}
+.tier .tn{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.tier .tp{font-family:var(--font-disp);font-size:clamp(30px,4vw,46px);margin-top:10px;line-height:1}
+.tier .td{font-size:12.5px;color:var(--ash);margin-top:8px}
+.kit-note{text-align:center;margin-top:22px;font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;color:var(--ash-dim)}
+.kit-note a{color:var(--gold);border-bottom:1px solid var(--line-gold)}
+
+/* ====================== FAQ ====================== */
+.faq-list{max-width:880px;margin:0 auto}
+.faq-item{border-top:1px solid var(--line)}
+.faq-item:last-child{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 6px;font-family:var(--font-disp);text-transform:uppercase;font-size:clamp(18px,2.2vw,26px);color:var(--fog);transition:color .3s;background:none;border:0;cursor:pointer}
+.faq-q:hover{color:var(--gold-bright)}
+.faq-item.open .faq-q{color:var(--gold-bright)}
+.faq-q .pm{flex:0 0 auto;width:24px;height:24px;position:relative}
+.faq-q .pm::before,.faq-q .pm::after{content:"";position:absolute;background:var(--gold);border-radius:2px;transition:transform .35s var(--ease),opacity .3s}
+.faq-q .pm::before{top:11px;left:3px;width:18px;height:2px}
+.faq-q .pm::after{top:3px;left:11px;width:2px;height:18px}
+.faq-item.open .pm::after{transform:scaleY(0)}
+.faq-item.open .pm::before{transform:rotate(180deg)}
+.faq-a{overflow:hidden;max-height:0;transition:max-height .45s var(--ease)}
+.faq-a-inner{padding:0 6px 28px;color:var(--ash);font-size:15.5px;line-height:1.7;max-width:760px}
+.faq-a-inner b{color:var(--gold-bright);font-weight:600}
+.faq-a-inner a{color:var(--gold);border-bottom:1px solid var(--line-gold)}
+
 /* ====================== MEDIA ====================== */
 .media{position:relative;overflow:hidden}
 .perf{text-align:center;margin-bottom:48px}
@@ -467,6 +512,7 @@ main{position:relative;z-index:1}
     <ul class="nav-links" id="navlinks">
       <li><a href="#about">The Games</a></li>
       <li><a href="#format">Format</a></li>
+      <li><a href="#kits">Judge Kits</a></li>
       <li><a href="#event">2026 Event</a></li>
       <li><a href="#champions">Champions</a></li>
       <li><a href="#media">Media</a></li>
@@ -696,6 +742,57 @@ main{position:relative;z-index:1}
   </div>
 </section>
 
+<!-- ===================== JUDGE KITS ===================== -->
+<section class="section" id="kits" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow center">Become A Judge</span>
+      <h2 class="section-title chrome" style="margin-top:18px">The Judge Kits</h2>
+      <p class="section-sub">This is how the public crowns a champion. Grab a kit, score the blind-labeled finalists in your private portal, and your palate helps decide the People's Choice — <b style="color:var(--gold-bright)">every kit comes with 2 tickets to the Awards Ceremony.</b></p>
+    </div>
+    <div class="kits-grid">
+      <div class="kit flower reveal tilt"><span class="sheen"></span>
+        <div class="kit-top">
+          <svg class="kit-ic"><use href="#i-leaf"/></svg>
+          <span class="kit-name">Flower Kit</span>
+          <span class="kit-amt">48g Flower</span>
+        </div>
+        <p class="kit-desc">Curated, blind-labeled finalist flower — freshly grown for the finals — delivered straight to your palate for judging.</p>
+        <ul class="kit-inc">
+          <li><svg><use href="#i-leaf"/></svg><span><b>48 grams</b> of anonymized finalist flower</span></li>
+          <li><svg><use href="#i-broadcast"/></svg><span>Private <b>digital scoring portal</b> — submit before the deadline</span></li>
+          <li><svg><use href="#i-ticket"/></svg><span><b>2 tickets</b> to the Awards Ceremony</span></li>
+          <li><svg><use href="#i-trophy"/></svg><span>Your vote crowns the <b>People's Choice</b> winners</span></li>
+        </ul>
+        <div class="kit-foot">Sold in-person at Greenwolf &amp; licensed partner dispensaries · pricing set by each market</div>
+      </div>
+      <div class="kit rosin reveal d2 tilt"><span class="sheen"></span>
+        <div class="kit-top">
+          <svg class="kit-ic"><use href="#i-drop"/></svg>
+          <span class="kit-name">Rosin Kit</span>
+          <span class="kit-amt">14g Rosin</span>
+        </div>
+        <p class="kit-desc">For the solventless heads — a full flight of finalist rosin, blind-labeled, scored on flavor, terps and clarity.</p>
+        <ul class="kit-inc">
+          <li><svg><use href="#i-drop"/></svg><span><b>14 grams</b> of anonymized finalist rosin</span></li>
+          <li><svg><use href="#i-broadcast"/></svg><span>Private <b>digital scoring portal</b> — submit before the deadline</span></li>
+          <li><svg><use href="#i-ticket"/></svg><span><b>2 tickets</b> to the Awards Ceremony</span></li>
+          <li><svg><use href="#i-trophy"/></svg><span>Your vote crowns the <b>People's Choice</b> winners</span></li>
+        </ul>
+        <div class="kit-foot">Sold in-person at Greenwolf &amp; licensed partner dispensaries · pricing set by each market</div>
+      </div>
+    </div>
+
+    <div class="tiers-lbl reveal">Missed the boxes? Ceremony admission</div>
+    <div class="tiers reveal">
+      <div class="tier"><div class="tn">General Admission</div><div class="tp gold-text">$55+</div><div class="td">Doors, floor &amp; the full show</div></div>
+      <div class="tier"><div class="tn">Fast Pass</div><div class="tp gold-text">$82</div><div class="td">Priority entry — skip the line</div></div>
+      <div class="tier vip"><div class="tn">VIP</div><div class="tp gold-text">$135–268</div><div class="td">Premium access &amp; the best view</div></div>
+    </div>
+    <p class="kit-note reveal">Kits can't be shipped (federal law) and are only sold where a competition is running. Retail locations drop when sales open — questions to <a href="mailto:info@zalympix.com">info@zalympix.com</a>.</p>
+  </div>
+</section>
+
 <!-- ===================== EVENT 2026 ===================== -->
 <section class="section event" id="event">
   <div class="hero-glow" aria-hidden="true" style="opacity:.5"></div>
@@ -829,6 +926,17 @@ main{position:relative;z-index:1}
   </div>
 </section>
 
+<!-- ===================== FAQ ===================== -->
+<section class="section" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow center">Good To Know</span>
+      <h2 class="section-title chrome" style="margin-top:18px">Frequently Asked</h2>
+    </div>
+    <div class="faq-list reveal" id="faqlist"></div>
+  </div>
+</section>
+
 <!-- ===================== FINAL CTA ===================== -->
 <section class="section final" id="enter">
   <div class="hero-glow" aria-hidden="true"></div>
@@ -872,10 +980,11 @@ main{position:relative;z-index:1}
       </div>
       <div class="foot-col">
         <h5>Get Involved</h5>
+        <a href="#kits">Judge Kits</a>
         <a href="#enter">Enter a Brand</a>
         <a href="#enter">Sponsorship</a>
-        <a href="#enter">Newsletter</a>
-        <a href="#event">Press &amp; ZNN</a>
+        <a href="#media">Press &amp; ZNN</a>
+        <a href="#faq">FAQ</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -1153,6 +1262,31 @@ main{position:relative;z-index:1}
       return '<a class="pw" href="'+p.u+'" target="_blank" rel="noopener"><div><div class="qm">“</div><div class="q">'+p.q+'</div></div>'+
         '<div class="o"><span>'+p.o+'</span><span class="arw">↗</span></div></a>';
     }).join("");
+  }
+
+  /* ---------- FAQ (accordion) ---------- */
+  var faqs=[
+    {q:"How do I get a Flower or Rosin judge kit?",a:"Judge kits go on sale through our retail partners in each competition state and must be purchased <b>in person</b>. Locations are announced when sales open for that region."},
+    {q:"What's inside a judge kit?",a:"A Flower kit holds <b>48g</b> of anonymized finalist flower; a Rosin kit holds <b>14g</b> of finalist rosin. Every kit includes access to a private <b>digital scoring portal</b> and <b>2 complimentary tickets</b> to the Awards Ceremony (held about a month after kits drop)."},
+    {q:"Can I get a kit if I'm not in the competition state?",a:"No — kits are only sold where a competition is running and <b>cannot be shipped</b> due to federal regulations. Catch the ceremony instead, or wait for a Zalympix in your region."},
+    {q:"How do I actually become a judge?",a:"Anyone who buys a kit becomes a <b>public judge</b> — you score the blind entries in the portal before the deadline and your votes decide the People's Choice. Industry-panel judge spots open occasionally; email us with your qualifications to be considered."},
+    {q:"How is a champion decided?",a:"Every entry is <b>stripped of its branding</b> and judged blind. A preliminary industry panel narrows the field to finalists, then the public scores curated kits — the two verdicts crown the winners across each category."},
+    {q:"What is the Preliminary Round?",a:"Before the public ever votes, licensed cultivators enter and a panel of industry experts judges those entries to determine the finalists who advance to the judge kits."},
+    {q:"I'm a brand or influencer — how do I get involved?",a:"We'd love to talk. Reach out about sponsorships, activations and partnerships via DM or <a href=\"mailto:info@zalympix.com\">info@zalympix.com</a>, and enter the next preliminary round when it opens."},
+    {q:"Where does the Zalympix run — and how do you say it?",a:"An annual circuit across <b>California, Michigan and Oklahoma</b> (with East Coast / NYC editions too). And it's pronounced <b>“zah”-lympix</b> — not “zay.”"}
+  ];
+  var fl=document.getElementById("faqlist");
+  if(fl){
+    fl.innerHTML=faqs.map(function(f){
+      return '<div class="faq-item"><button class="faq-q" aria-expanded="false"><span>'+f.q+'</span><span class="pm" aria-hidden="true"></span></button>'+
+        '<div class="faq-a"><div class="faq-a-inner">'+f.a+'</div></div></div>';
+    }).join("");
+    fl.addEventListener("click",function(e){
+      var btn=e.target.closest(".faq-q");if(!btn)return;
+      var item=btn.parentNode,ans=item.querySelector(".faq-a"),open=item.classList.toggle("open");
+      btn.setAttribute("aria-expanded",open);
+      ans.style.maxHeight=open?(ans.firstElementChild.scrollHeight+"px"):"0px";
+    });
   }
 
   /* ---------- MARQUEE SEAMLESS (duplicate content) ---------- */
