@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZALYMPIX — The Grammys of Cannabis</title>
 <meta name="description" content="ZALYMPIX is the premier cannabis competition and industry awards — five years of crowning the world's best flower, genetics and hash across California, Michigan and Oklahoma.">
+<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta name="theme-color" content="#070509">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ZALYMPIX — The Grammys of Cannabis">
+<meta property="og:description" content="The premier cannabis competition & awards. Five years crowning the world's best flower, genetics and hash across California, Michigan & Oklahoma.">
+<meta property="og:image" content="https://zalympix.vercel.app/assets/og.jpg">
+<meta property="og:url" content="https://zalympix.vercel.app">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ZALYMPIX — The Grammys of Cannabis">
+<meta name="twitter:image" content="https://zalympix.vercel.app/assets/og.jpg">
+<link rel="preload" as="image" href="assets/logo.webp">
 <style>
 /* ============================================================
    ZALYMPIX — chrome / matte-black / gold award-show identity
@@ -328,6 +341,18 @@ main{position:relative;z-index:1}
 .socials svg{width:17px;height:17px}
 .disclaimer{text-align:center;margin-top:24px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--ash-dim);opacity:.7}
 
+/* ====================== BRAND LOGO + POLISH ====================== */
+.progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:70;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright) 60%,var(--mag));box-shadow:0 0 12px rgba(233,196,106,.6)}
+.brand{display:flex;align-items:center}
+.nav-logo{height:38px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(224,96,154,.4))}
+.hero-logo-wrap{position:relative;z-index:2;display:flex;justify-content:center;margin:2px auto 0;max-width:1000px;will-change:transform}
+.hero-logo{width:min(880px,90vw);height:auto;filter:drop-shadow(0 12px 44px rgba(224,96,154,.4)) drop-shadow(0 6px 26px rgba(87,199,242,.22))}
+.foot-logo{height:54px;width:auto;filter:drop-shadow(0 4px 18px rgba(224,96,154,.32))}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.tilt{position:relative;transform-style:preserve-3d;transition:transform .2s var(--ease)}
+.tilt .sheen{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;z-index:4;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.16),transparent 42%);transition:opacity .35s}
+.tilt:hover .sheen{opacity:1}
+
 /* ====================== REVEAL ====================== */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal.in{opacity:1;transform:none}
@@ -394,11 +419,12 @@ main{position:relative;z-index:1}
 </svg>
 
 <div class="atmos" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <!-- ===================== NAV ===================== -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#top" class="brand chrome">Zalympix</a>
+    <a href="#top" class="brand" aria-label="Zalympix — home"><img class="nav-logo" src="assets/logo.webp" alt="Zalympix"></a>
     <ul class="nav-links" id="navlinks">
       <li><a href="#about">The Games</a></li>
       <li><a href="#format">Format</a></li>
@@ -417,6 +443,7 @@ main{position:relative;z-index:1}
 <header class="hero">
   <canvas id="embers" aria-hidden="true"></canvas>
   <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true" style="background:radial-gradient(closest-side,rgba(224,96,154,.16),transparent 72%);width:760px;height:600px;top:-2%"></div>
   <svg class="hero-laurel" viewBox="0 0 400 400" aria-hidden="true"><use href="#laurel-full"/></svg>
   <!-- laurel def -->
   <svg width="0" height="0" style="position:absolute"><defs><g id="laurel-full">
@@ -442,7 +469,13 @@ main{position:relative;z-index:1}
 
   <div class="hero-inner">
     <span class="eyebrow center hero-eyebrow">V · Fifth Annual · Est. 2021</span>
-    <h1 class="hero-title chrome">Zalympix<span class="shine" aria-hidden="true">Zalympix</span></h1>
+    <h1 class="vh">California Zalympix — The Grammys of Cannabis</h1>
+    <div class="hero-logo-wrap" id="herologo">
+      <picture>
+        <source srcset="assets/logo.webp" type="image/webp">
+        <img class="hero-logo" src="assets/logo.png" alt="California Zalympix" width="880" height="556" fetchpriority="high">
+      </picture>
+    </div>
     <p class="hero-tag">The Grammys of Cannabis</p>
 
     <div class="hero-meta">
@@ -633,7 +666,7 @@ main{position:relative;z-index:1}
       <p class="section-sub">The industry's most prestigious night — where the season's champions are crowned and the culture comes together.</p>
     </div>
     <div class="event-grid">
-      <div class="event-card reveal">
+      <div class="event-card reveal tilt"><span class="sheen"></span>
         <div class="poster">
           <div class="kicker">Presented by Miron × Rare Candy Supply</div>
           <div class="big chrome">2026<br>California</div>
@@ -750,8 +783,8 @@ main{position:relative;z-index:1}
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <div class="b chrome">Zalympix</div>
-        <p>The Grammys of Cannabis. Crowning the world's best flower, genetics and hash since 2021 — across California, Michigan and Oklahoma.</p>
+        <img class="foot-logo" src="assets/logo.webp" alt="Zalympix">
+        <p style="margin-top:20px">The Grammys of Cannabis. Crowning the world's best flower, genetics and hash since 2021 — across California, Michigan and Oklahoma.</p>
       </div>
       <div class="foot-col">
         <h5>The Games</h5>
@@ -808,6 +841,46 @@ main{position:relative;z-index:1}
     entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target);}});
   },{threshold:.12,rootMargin:"0px 0px -8% 0px"});
   document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+
+  /* ---------- SCROLL PROGRESS + HERO PARALLAX ---------- */
+  var prog=document.getElementById("progress"),herologo=document.getElementById("herologo");
+  var sy=0,mx=0,my=0,ticking=false;
+  function frame(){
+    ticking=false;
+    var doc=document.documentElement,max=doc.scrollHeight-doc.clientHeight;
+    if(prog)prog.style.width=(max>0?(sy/max*100):0)+"%";
+    if(herologo&&!reduce){
+      var p=Math.min(sy/700,1);
+      herologo.style.transform="translate3d("+(mx*10).toFixed(1)+"px,"+(p*42+my*8).toFixed(1)+"px,0) scale("+(1-p*0.06).toFixed(3)+")";
+      herologo.style.opacity=(1-p*0.72).toFixed(3);
+    }
+  }
+  function onScrollP(){sy=window.scrollY||window.pageYOffset;if(!ticking){ticking=true;requestAnimationFrame(frame);}}
+  window.addEventListener("scroll",onScrollP,{passive:true});
+  if(!reduce&&window.matchMedia("(pointer:fine)").matches){
+    window.addEventListener("pointermove",function(e){
+      mx=(e.clientX/window.innerWidth-0.5);my=(e.clientY/window.innerHeight-0.5);
+      if(!ticking){ticking=true;requestAnimationFrame(frame);}
+    },{passive:true});
+  }
+  onScrollP();
+
+  /* ---------- CARD TILT ---------- */
+  function initTilt(){
+    if(reduce||!window.matchMedia("(pointer:fine)").matches)return;
+    document.querySelectorAll(".tilt:not([data-tilt])").forEach(function(card){
+      card.setAttribute("data-tilt","");
+      card.addEventListener("pointermove",function(e){
+        var r=card.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+        card.style.transform="perspective(950px) rotateX("+((0.5-py)*4.5).toFixed(2)+"deg) rotateY("+((px-0.5)*6).toFixed(2)+"deg)";
+        card.style.setProperty("--mx",(px*100).toFixed(1)+"%");
+        card.style.setProperty("--my",(py*100).toFixed(1)+"%");
+      });
+      card.addEventListener("pointerleave",function(){card.style.transform="";});
+    });
+  }
+  initTilt();
 
   /* ---------- COUNTDOWN (next live event) ---------- */
   var target=new Date("2026-09-19T18:00:00-07:00").getTime();
@@ -922,7 +995,7 @@ main{position:relative;z-index:1}
     grid.innerHTML="";
     champs[region].forEach(function(c,idx){
       var card=document.createElement("div");
-      card.className="champ-card reveal"+(idx%2?" d1":"");
+      card.className="champ-card reveal tilt"+(idx%2?" d1":"");
       var pod=c.p.map(function(row,i){
         var tint=i===0?"gold":i===1?"silver":"bronze";
         return '<div class="place p'+(i+1)+'"><span class="bm">'+brandMark(row[0],bmHash(row[0])%6,tint)+'</span>'+
@@ -932,9 +1005,10 @@ main{position:relative;z-index:1}
       var spec=c.specials?'<div class="cc-specials">'+c.specials.map(function(s){
         return '<div class="spec"><span class="sk">'+s[0]+'</span><span class="sv"><b>'+s[1]+'</b></span></div>';}).join("")+'</div>':"";
       card.innerHTML='<div class="cc-head"><div class="cc-title">'+c.title+'</div><div class="cc-div">'+c.div+'</div></div>'+
-        '<div class="podium">'+pod+'</div>'+spec;
+        '<div class="podium">'+pod+'</div>'+spec+'<span class="sheen"></span>';
       grid.appendChild(card);io.observe(card);
     });
+    initTilt();
   }
   render("California");
   document.getElementById("champtabs").addEventListener("click",function(e){
