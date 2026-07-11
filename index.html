@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZALYMPIX — The Grammys of Cannabis</title>
+<meta name="description" content="ZALYMPIX is the premier cannabis competition and industry awards — five years of crowning the world's best flower, genetics and hash across California, Michigan and Oklahoma.">
+<style>
+/* ============================================================
+   ZALYMPIX — chrome / matte-black / gold award-show identity
+   Committed single-theme (award-show-at-night) — deliberate.
+   ============================================================ */
+
+:root{
+  --void:#070509;          /* violet-black ground */
+  --void-2:#0a0710;
+  --onyx:#100c16;          /* raised panels */
+  --graphite:#171220;      /* cards */
+  --graphite-2:#1d1728;
+  --line:#2a2233;          /* hairlines */
+  --line-gold:rgba(233,196,106,.22);
+
+  --gold:#e9c46a;
+  --gold-bright:#f7e6b4;
+  --gold-deep:#a9832f;
+  --gold-ink:#6b5218;
+
+  --fog:#e7e2f0;           /* primary text, faint violet */
+  --ash:#a49bb6;           /* muted */
+  --ash-dim:#726984;       /* dimmer */
+
+  --mag:#e0609a;
+  --violet:#7b5cff;
+  --cyan:#57c7f2;
+
+  /* logo chrome, top-lit sunset chrome */
+  --chrome:linear-gradient(178deg,#fff7e6 0%,#f9dd8a 15%,#eba53f 33%,#b8692c 47%,#8a3f5f 56%,#5a3695 69%,#2f6fb0 83%,#bfe9ff 100%);
+  --gold-grad:linear-gradient(180deg,#fdeab6 0%,#e9c46a 45%,#b8892f 100%);
+
+  --maxw:1240px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --font-disp:"Haettenschweiler","Arial Narrow","Oswald",Impact,"Franklin Gothic Bold","Arial Black",sans-serif;
+  --font-body:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--void);color:var(--fog);
+  font-family:var(--font-body);font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;line-height:.95;text-wrap:balance;font-weight:400}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+::selection{background:var(--gold);color:#1a1305}
+
+/* ---------- shared utility ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.chrome{
+  background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.5)) drop-shadow(0 3px 22px rgba(233,196,106,.18));
+}
+.gold-text{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.disp{font-family:var(--font-disp);letter-spacing:.01em}
+.eyebrow{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold);display:inline-flex;align-items:center;gap:12px;font-weight:600;
+}
+.eyebrow::before,.eyebrow.center::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.eyebrow.center::before{background:linear-gradient(90deg,var(--gold),transparent)}
+.section{position:relative;padding:clamp(72px,10vw,140px) 0}
+.section-head{max-width:760px;margin:0 auto 60px;text-align:center}
+.section-head.left{margin-left:0;text-align:left}
+.section-title{font-family:var(--font-disp);font-size:clamp(38px,7vw,86px);text-transform:uppercase;letter-spacing:.005em;line-height:.92}
+.section-sub{margin-top:22px;color:var(--ash);font-size:clamp(15px,1.6vw,18px);line-height:1.7}
+.hair{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--line-gold) 20%,var(--line-gold) 80%,transparent)}
+
+/* fixed atmosphere: grain + vignette + glows */
+.atmos{position:fixed;inset:0;pointer-events:none;z-index:0}
+.atmos::before{ /* grain */
+  content:"";position:absolute;inset:-50%;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.atmos::after{ /* top vignette warmth */
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 60% at 50% -10%,rgba(233,196,106,.10),transparent 60%),
+             radial-gradient(90% 50% at 100% 110%,rgba(123,92,255,.08),transparent 60%),
+             radial-gradient(70% 40% at 0% 100%,rgba(87,199,242,.05),transparent 60%);
+}
+main{position:relative;z-index:1}
+
+/* ====================== NAV ====================== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .4s,backdrop-filter .4s,border-color .4s}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.nav.scrolled{background:rgba(9,6,13,.72);backdrop-filter:blur(16px) saturate(1.3);border-bottom:1px solid var(--line-gold)}
+.brand{font-family:var(--font-disp);font-size:23px;letter-spacing:.12em;font-style:italic;text-transform:uppercase}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);transition:color .25s;position:relative}
+.nav-links a:hover{color:var(--gold-bright)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--gold);transition:width .3s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:12px 22px;border-radius:2px;transition:transform .25s var(--ease),box-shadow .25s,filter .25s;white-space:nowrap}
+.btn-gold{background:var(--gold-grad);color:#241a04;box-shadow:0 6px 24px rgba(233,196,106,.28),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(233,196,106,.42),inset 0 1px 0 rgba(255,255,255,.6);filter:brightness(1.05)}
+.btn-ghost{border:1px solid var(--line-gold);color:var(--gold-bright)}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(233,196,106,.06);transform:translateY(-2px)}
+.nav-toggle{display:none;width:44px;height:44px;align-items:center;justify-content:center}
+.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{content:"";display:block;width:22px;height:2px;background:var(--gold);position:relative;transition:.3s}
+.nav-toggle span::before{position:absolute;top:-7px}.nav-toggle span::after{position:absolute;top:7px}
+
+/* ====================== HERO ====================== */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 40px;overflow:hidden}
+#embers{position:absolute;inset:0;z-index:0;opacity:.7}
+.hero-laurel{position:absolute;top:50%;left:50%;transform:translate(-50%,-46%);width:min(1150px,140vw);height:auto;opacity:.08;z-index:0;color:var(--gold)}
+.hero-glow{position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(closest-side,rgba(233,196,106,.20),transparent 72%);filter:blur(20px);z-index:0}
+.hero-inner{position:relative;z-index:2;text-align:center;max-width:1080px;margin:0 auto;padding:0 24px}
+.hero-eyebrow{justify-content:center;margin-bottom:26px}
+.hero-title{font-family:var(--font-disp);font-style:italic;text-transform:uppercase;font-size:clamp(74px,17vw,232px);letter-spacing:.005em;line-height:.82;position:relative;display:inline-block}
+.hero-title .shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.85) 48%,transparent 58%);-webkit-background-clip:text;background-clip:text;color:transparent;mix-blend-mode:screen;transform:translateX(-120%);animation:shine 6.5s var(--ease) 1.2s infinite}
+@keyframes shine{0%,72%{transform:translateX(-120%)}88%,100%{transform:translateX(120%)}}
+.hero-tag{font-family:var(--font-disp);text-transform:uppercase;font-size:clamp(16px,2.6vw,30px);letter-spacing:.42em;color:var(--fog);margin:18px 0 0;opacity:.92;padding-left:.42em}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;align-items:center;margin-top:30px;font-family:var(--font-mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash)}
+.hero-meta b{color:var(--gold-bright);font-weight:600}
+.hero-meta .dot{width:5px;height:5px;border-radius:50%;background:var(--gold-deep)}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ash-dim);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-hint .rail{width:1px;height:44px;background:linear-gradient(var(--gold),transparent);position:relative;overflow:hidden}
+.scroll-hint .rail::after{content:"";position:absolute;top:0;left:0;width:100%;height:14px;background:var(--gold-bright);animation:drop 2.2s var(--ease) infinite}
+@keyframes drop{0%{transform:translateY(-14px)}100%{transform:translateY(44px)}}
+
+/* countdown */
+.countdown{display:inline-flex;gap:8px;margin-top:38px;padding:16px 20px;border:1px solid var(--line-gold);border-radius:4px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.2));backdrop-filter:blur(6px);box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05)}
+.cd-label{position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);background:var(--void);padding:0 12px;white-space:nowrap}
+.countdown{position:relative}
+.cd-unit{min-width:64px;text-align:center}
+.cd-num{font-family:var(--font-disp);font-size:clamp(30px,5vw,46px);line-height:1;font-variant-numeric:tabular-nums}
+.cd-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ash);margin-top:6px}
+.cd-sep{font-family:var(--font-disp);font-size:clamp(26px,4vw,40px);color:var(--gold-deep);align-self:flex-start;line-height:1.1}
+
+/* ====================== MARQUEE ====================== */
+.marquee{position:relative;overflow:hidden;border-top:1px solid var(--line-gold);border-bottom:1px solid var(--line-gold);background:linear-gradient(180deg,var(--void-2),var(--void));padding:18px 0}
+.marquee.gold{background:linear-gradient(90deg,#1a1305,#241a06,#1a1305)}
+.mq-track{display:flex;gap:0;width:max-content;animation:mq 42s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+.mq-track span{font-family:var(--font-disp);text-transform:uppercase;font-size:26px;letter-spacing:.05em;padding:0 30px;display:inline-flex;align-items:center;gap:30px;white-space:nowrap}
+.mq-track .star{color:var(--gold);font-size:15px}
+.marquee.gold .mq-track span{color:#f6e4b0}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ====================== SEASON PIPELINE ====================== */
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stage{position:relative;padding:26px 22px;border:1px solid var(--line);border-radius:6px;background:linear-gradient(180deg,var(--graphite),var(--onyx));overflow:hidden;transition:transform .35s var(--ease),border-color .35s}
+.stage:hover{transform:translateY(-4px);border-color:var(--line-gold)}
+.stage .st-state{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:100px;margin-bottom:18px}
+.st-live{color:#0b1207;background:var(--gold);font-weight:700}
+.st-done{color:var(--ash);border:1px solid var(--line)}
+.st-open{color:#0b1207;background:linear-gradient(90deg,var(--cyan),var(--gold));font-weight:700}
+.stage h3{font-family:var(--font-disp);font-size:30px;text-transform:uppercase;margin-bottom:4px}
+.stage .st-place{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.stage .st-date{color:var(--ash);font-size:14px}
+.stage .st-num{position:absolute;right:14px;bottom:2px;font-family:var(--font-disp);font-size:90px;line-height:1;color:rgba(255,255,255,.03)}
+.st-live-dot{width:7px;height:7px;border-radius:50%;background:#0b1207;box-shadow:0 0 0 0 rgba(11,18,7,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(11,18,7,.5)}70%{box-shadow:0 0 0 6px rgba(11,18,7,0)}100%{box-shadow:0 0 0 0 rgba(11,18,7,0)}}
+
+/* ====================== STATS ====================== */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line-gold);border-radius:8px;overflow:hidden;background:linear-gradient(180deg,var(--onyx),var(--void-2))}
+.stat{padding:38px 20px;text-align:center;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat .num{font-family:var(--font-disp);font-size:clamp(44px,6vw,74px);line-height:1;font-variant-numeric:tabular-nums}
+.stat .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ash);margin-top:12px}
+
+/* ====================== ABOUT ====================== */
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.about-copy p{color:var(--ash);font-size:17px;margin-top:20px}
+.about-copy .lead{font-size:clamp(19px,2.2vw,25px);color:var(--fog);line-height:1.5}
+.about-copy .lead b{color:var(--gold-bright);font-weight:600}
+.pillars{display:grid;gap:14px;margin-top:34px}
+.pillar{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;border:1px solid var(--line);border-radius:6px;background:var(--graphite);transition:border-color .3s,transform .3s var(--ease)}
+.pillar:hover{border-color:var(--line-gold);transform:translateX(4px)}
+.pillar .ic{width:38px;height:38px;flex:0 0 38px;color:var(--gold)}
+.pillar h4{font-family:var(--font-disp);font-size:21px;text-transform:uppercase;margin-bottom:3px}
+.pillar p{font-size:14px;color:var(--ash);line-height:1.5}
+.about-art{position:relative;aspect-ratio:1;display:grid;place-items:center}
+.about-art .medal-lg{width:78%;color:var(--gold);filter:drop-shadow(0 20px 50px rgba(233,196,106,.28))}
+.about-art .ring{position:absolute;inset:6%;border:1px solid var(--line-gold);border-radius:50%}
+.about-art .ring.r2{inset:0;border-style:dashed;animation:spin 60s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ====================== FORMAT TIMELINE ====================== */
+.timeline{position:relative;display:grid;gap:0;margin-top:20px}
+.tl-item{display:grid;grid-template-columns:120px 1fr;gap:30px;padding:30px 0;border-top:1px solid var(--line);position:relative}
+.tl-item:last-child{border-bottom:1px solid var(--line)}
+.tl-num{font-family:var(--font-disp);font-size:56px;line-height:1;color:transparent;-webkit-text-stroke:1px var(--gold-deep);position:relative}
+.tl-item:hover .tl-num{-webkit-text-stroke:1px var(--gold)}
+.tl-body h3{font-family:var(--font-disp);font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;margin-bottom:8px}
+.tl-body .when{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:inline-block}
+.tl-body p{color:var(--ash);max-width:640px}
+.tl-body .tag{display:inline-block;margin-top:14px;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--gold-bright);padding:5px 12px;border:1px solid var(--line-gold);border-radius:100px}
+
+/* ====================== CATEGORIES ====================== */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cat{position:relative;padding:30px;border:1px solid var(--line);border-radius:8px;background:linear-gradient(180deg,var(--graphite),var(--onyx));overflow:hidden;transition:transform .4s var(--ease),border-color .4s}
+.cat::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 100% at 100% 0,rgba(233,196,106,.10),transparent 55%);opacity:0;transition:opacity .4s}
+.cat:hover{transform:translateY(-5px);border-color:var(--line-gold)}
+.cat:hover::before{opacity:1}
+.cat .ic{width:46px;height:46px;color:var(--gold);margin-bottom:22px;position:relative}
+.cat h3{font-family:var(--font-disp);font-size:27px;text-transform:uppercase;margin-bottom:8px;position:relative}
+.cat p{font-size:14px;color:var(--ash);line-height:1.55;position:relative}
+.cat .badge{position:absolute;top:22px;right:22px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);border:1px solid var(--line);padding:4px 8px;border-radius:100px}
+.cat.industry .badge{color:var(--cyan);border-color:rgba(87,199,242,.35)}
+
+/* ====================== EVENT FEATURE ====================== */
+.event{position:relative;overflow:hidden}
+.event-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.event-card{border:1px solid var(--line-gold);border-radius:10px;background:linear-gradient(160deg,var(--graphite-2),var(--void-2));padding:0;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.55)}
+.event-card .poster{position:relative;padding:40px 36px;background:radial-gradient(120% 120% at 50% 0,rgba(233,196,106,.14),transparent 60%);border-bottom:1px solid var(--line)}
+.event-card .kicker{font-family:var(--font-mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.event-card .big{font-family:var(--font-disp);font-style:italic;text-transform:uppercase;font-size:clamp(46px,7vw,86px);line-height:.82}
+.event-card .sub{font-family:var(--font-disp);letter-spacing:.3em;text-transform:uppercase;font-size:16px;color:var(--fog);margin-top:10px;padding-left:.3em}
+.event-rows{display:grid}
+.erow{display:flex;align-items:center;gap:18px;padding:18px 36px;border-top:1px solid var(--line)}
+.erow .ic{width:26px;height:26px;color:var(--gold);flex:0 0 26px}
+.erow .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash-dim);width:96px;flex:0 0 96px}
+.erow .v{font-size:15.5px;color:var(--fog)}
+.erow .v b{color:var(--gold-bright);font-weight:600}
+.event-copy h2{font-family:var(--font-disp);font-size:clamp(34px,5vw,64px);text-transform:uppercase;line-height:.92;margin-bottom:22px}
+.event-copy p{color:var(--ash);font-size:16.5px;margin-bottom:18px}
+.lineup{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 30px}
+.act{font-family:var(--font-disp);text-transform:uppercase;font-size:19px;letter-spacing:.04em;padding:10px 16px;border:1px solid var(--line-gold);border-radius:4px;background:linear-gradient(180deg,rgba(233,196,106,.06),transparent);transition:.3s}
+.act:hover{border-color:var(--gold);color:var(--gold-bright);transform:translateY(-2px)}
+.act.head{background:var(--gold-grad);color:#241a04;border-color:transparent}
+.xp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+.xp{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--ash)}
+.xp .ic{width:22px;height:22px;color:var(--gold);flex:0 0 22px}
+
+/* ====================== CHAMPIONS ====================== */
+.champ-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.ctab{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:11px 20px;border:1px solid var(--line);border-radius:100px;color:var(--ash);transition:.3s}
+.ctab[aria-selected="true"]{background:var(--gold-grad);color:#241a04;border-color:transparent;font-weight:700}
+.ctab:hover:not([aria-selected="true"]){border-color:var(--line-gold);color:var(--gold-bright)}
+.champ-note{text-align:center;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;color:var(--ash-dim);margin-bottom:40px}
+.champ-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.champ-card{border:1px solid var(--line);border-radius:10px;background:linear-gradient(180deg,var(--graphite),var(--onyx));padding:28px 26px 30px;transition:border-color .4s,transform .4s var(--ease)}
+.champ-card:hover{border-color:var(--line-gold);transform:translateY(-4px)}
+.cc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;gap:12px}
+.cc-title{font-family:var(--font-disp);font-size:26px;text-transform:uppercase;letter-spacing:.02em}
+.cc-div{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line-gold);padding:5px 11px;border-radius:100px;white-space:nowrap}
+.podium{display:grid;gap:10px}
+.place{display:grid;grid-template-columns:46px 1fr;gap:14px;align-items:center;padding:14px 34px 14px 16px;border-radius:7px;position:relative;overflow:hidden}
+.place .bm{width:46px;height:46px}
+.rankpill{position:absolute;top:9px;right:11px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-disp);font-size:13px;background:rgba(255,255,255,.05);color:var(--ash);border:1px solid var(--line)}
+.place.p1 .rankpill{background:var(--gold);color:#241a04;border-color:transparent}
+.place.p2 .rankpill{background:#c9cdd6;color:#20222b;border-color:transparent}
+.place.p3 .rankpill{background:#c9895e;color:#2a1608;border-color:transparent}
+.place.p1{background:linear-gradient(90deg,rgba(233,196,106,.16),rgba(233,196,106,.03));border:1px solid var(--line-gold)}
+.place.p2{background:linear-gradient(90deg,rgba(197,197,210,.10),transparent);border:1px solid var(--line)}
+.place.p3{background:linear-gradient(90deg,rgba(191,120,74,.10),transparent);border:1px solid var(--line)}
+.medal{width:44px;height:44px;display:grid;place-items:center;position:relative}
+.medal .mnum{font-family:var(--font-disp);font-size:20px;position:absolute;color:#241a04}
+.place.p2 .medal .mnum{color:#20222b}.place.p3 .medal .mnum{color:#2a1608}
+.pinfo .brand{font-family:var(--font-disp);font-size:20px;text-transform:uppercase;letter-spacing:.02em;line-height:1}
+.pinfo .strain{font-size:13.5px;color:var(--ash);margin-top:4px;font-style:italic}
+.place.p1 .brand{color:var(--gold-bright)}
+.cc-specials{margin-top:20px;display:grid;gap:8px;border-top:1px solid var(--line);padding-top:18px}
+.spec{display:flex;justify-content:space-between;gap:14px;font-size:13px}
+.spec .sk{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ash-dim)}
+.spec .sv{color:var(--fog);text-align:right}.spec .sv b{color:var(--gold);font-weight:600}
+
+/* ====================== SPONSORS ====================== */
+.presented{text-align:center;margin-bottom:52px}
+.presented .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ash-dim);margin-bottom:22px}
+.presented .row{display:flex;flex-wrap:wrap;gap:22px 40px;justify-content:center;align-items:center}
+.presented .p{display:inline-flex;align-items:center;gap:15px;font-family:var(--font-disp);font-size:clamp(24px,3.4vw,40px);text-transform:uppercase;letter-spacing:.03em}
+.presented .bm{width:54px;height:54px}
+.sp-rows{display:grid;gap:14px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.sp-row{overflow:hidden}
+.sp-track{display:flex;gap:14px;width:max-content;animation:mq 60s linear infinite}
+.sp-row.rev .sp-track{animation-direction:reverse;animation-duration:74s}
+.sp-row.slow .sp-track{animation-duration:88s}
+.sp-rows:hover .sp-track{animation-play-state:paused}
+.chip{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-disp);text-transform:uppercase;font-size:19px;letter-spacing:.02em;color:var(--fog);padding:9px 20px 9px 10px;border:1px solid var(--line);border-radius:9px;background:linear-gradient(180deg,var(--graphite),var(--onyx));white-space:nowrap;transition:.3s}
+.chip:hover{color:var(--gold-bright);border-color:var(--line-gold);transform:translateY(-3px)}
+.bm{flex:0 0 auto;display:grid;place-items:center;line-height:0}
+.bm svg{display:block}
+.chip .bm{width:40px;height:40px}
+
+/* ====================== ZNN / PRESS ====================== */
+.press-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+.znn{border:1px solid var(--line-gold);border-radius:10px;padding:44px;background:linear-gradient(160deg,var(--graphite-2),var(--void-2));position:relative;overflow:hidden}
+.znn .ic{width:52px;height:52px;color:var(--gold);margin-bottom:24px}
+.znn h3{font-family:var(--font-disp);font-size:clamp(34px,4vw,52px);text-transform:uppercase;margin-bottom:14px}
+.znn p{color:var(--ash);max-width:460px;margin-bottom:26px}
+.press-quotes{display:grid;gap:16px}
+.quote{border:1px solid var(--line);border-radius:10px;padding:26px;background:var(--onyx);transition:.3s}
+.quote:hover{border-color:var(--line-gold)}
+.quote p{font-size:16px;line-height:1.5}
+.quote .src{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:16px}
+
+/* ====================== FINAL CTA ====================== */
+.final{position:relative;text-align:center;overflow:hidden;padding:clamp(90px,13vw,180px) 0}
+.final .hero-glow{top:auto;bottom:-30%}
+.final h2{font-family:var(--font-disp);font-style:italic;text-transform:uppercase;font-size:clamp(48px,10vw,140px);line-height:.85;position:relative;z-index:2}
+.final p{position:relative;z-index:2;max-width:560px;margin:24px auto 0;color:var(--ash);font-size:17px}
+.newsletter{position:relative;z-index:2;display:flex;gap:10px;max-width:480px;margin:38px auto 0;flex-wrap:wrap;justify-content:center}
+.newsletter input{flex:1;min-width:240px;background:var(--onyx);border:1px solid var(--line-gold);border-radius:3px;padding:15px 18px;color:var(--fog);font-family:var(--font-mono);font-size:13px;letter-spacing:.05em}
+.newsletter input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(233,196,106,.14)}
+.newsletter input::placeholder{color:var(--ash-dim)}
+
+/* ====================== FOOTER ====================== */
+.footer{border-top:1px solid var(--line-gold);background:var(--void-2);padding:70px 0 34px;position:relative;z-index:1}
+.foot-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;margin-bottom:54px}
+.foot-brand .b{font-family:var(--font-disp);font-style:italic;text-transform:uppercase;font-size:40px;letter-spacing:.08em}
+.foot-brand p{color:var(--ash);font-size:14px;margin-top:14px;max-width:300px}
+.foot-col h5{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.foot-col a{display:block;color:var(--ash);font-size:14px;padding:6px 0;transition:color .25s}
+.foot-col a:hover{color:var(--gold-bright)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:26px;border-top:1px solid var(--line)}
+.foot-bottom p{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--ash-dim)}
+.socials{display:flex;gap:10px}
+.socials a{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--ash);transition:.3s}
+.socials a:hover{color:var(--gold);border-color:var(--gold);transform:translateY(-3px)}
+.socials svg{width:17px;height:17px}
+.disclaimer{text-align:center;margin-top:24px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--ash-dim);opacity:.7}
+
+/* ====================== REVEAL ====================== */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  #embers,.hero-title .shine,.about-art .ring.r2,.mq-track,.sp-track,.scroll-hint .rail::after,.st-live-dot{animation:none!important}
+}
+
+/* ====================== RESPONSIVE ====================== */
+@media (max-width:1000px){
+  .about-grid,.event-grid,.press-grid{grid-template-columns:1fr;gap:40px}
+  .about-art{max-width:380px;margin:0 auto}
+  .pipeline{grid-template-columns:repeat(2,1fr)}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2n){border-right:0}.stat{border-bottom:1px solid var(--line)}
+  .champ-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .nav-links{position:fixed;inset:72px 0 auto 0;flex-direction:column;background:rgba(9,6,13,.97);backdrop-filter:blur(20px);padding:24px;gap:20px;border-bottom:1px solid var(--line-gold);transform:translateY(-120%);transition:transform .4s var(--ease);height:auto}
+  .nav-links.open{transform:none}
+  .nav-links .btn{width:100%;justify-content:center}
+  .nav-toggle{display:flex}
+  .cat-grid{grid-template-columns:1fr}
+  .xp-grid{grid-template-columns:1fr}
+  .tl-item{grid-template-columns:1fr;gap:8px}
+  .tl-num{font-size:44px}
+  .erow{padding:16px 22px}.erow .k{width:74px;flex-basis:74px}
+  .event-card .poster{padding:32px 24px}
+  .foot-top{grid-template-columns:1fr}
+  .final h2{font-size:clamp(44px,15vw,90px)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG SYMBOL LIBRARY ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M7 4h10v5a5 5 0 0 1-10 0V4Zm10 1h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3M12 14v3m-3 4h6m-5 0 .6-4h4.8l.6 4"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M12 3s5 3.5 5 8.5A5 5 0 0 1 7 12c0-1.6.8-2.8 1.6-3.6C8.4 10 10 11 10 11c0-3 2-6 2-8Z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="m12 3 2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9L6.7 19.5l1.1-6L3.4 9.3l6-.8L12 3Z"/></symbol>
+  <symbol id="i-diamond" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="M6 3h12l3 5-9 13L3 8l3-5Zm-3 5h18M9 3l-3 5 6 13 6-13-3-5M9 8l3-5 3 5"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" d="M12 21V9m0 0c0-3-2-6-2-6s-1 2-1 3m3 3c0-3 2-6 2-6s1 2 1 3M12 12 8 8s-3 0-4-1c1 2 3 3 3 3s-3 1-4 0c2 1 4 1 4 1m5 1 4-4s3 0 4-1c-1 2-3 3-3 3s3 1 4 0c-2 1-4 1-4 1"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
+  <symbol id="i-candy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.3"/><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="M16 9c3-2 5-1 5-1s-1 2-1 4 1 4 1 4-2 1-5-1M8 15c-3 2-5 1-5 1s1-2 1-4-1-4-1-4 2-1 5 1"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M3 9h18M8 3v4m8-4v4"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3m-3 0h6"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2 2 2 0 0 0 0 4 2 2 0 0 1-2 2H5a2 2 0 0 1-2-2 2 2 0 0 0 0-4Z"/><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="1.5 2.5" d="M14 6v12"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.4"/><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M3 20a6 6 0 0 1 12 0M16 5.5a3 3 0 0 1 0 6M17 20a6 6 0 0 0-3-5.2"/></symbol>
+  <symbol id="i-broadcast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M8 8a6 6 0 0 0 0 8M16 8a6 6 0 0 1 0 8M5 5a11 11 0 0 0 0 14M19 5a11 11 0 0 1 0 14"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l2.2 11.2a1.5 1.5 0 0 0 1.5 1.2h8.1a1.5 1.5 0 0 0 1.5-1.2L21 8H6"/><circle cx="9" cy="20" r="1.3" fill="currentColor"/><circle cx="18" cy="20" r="1.3" fill="currentColor"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6l-7-3Z"/><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.3"/><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" d="M12 7v5l3.5 2"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3h3.2l-7 8 8.2 10h-6.4l-5-6.1L8.9 21H5.7l7.5-8.6L5.3 3h6.5l4.5 5.6L17.5 3Zm-1.1 16h1.8L8.3 4.8H6.4L16.4 19Z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.4"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9S14.5 18.5 12 21c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3Z"/></symbol>
+ </defs>
+</svg>
+
+<div class="atmos" aria-hidden="true"></div>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand chrome">Zalympix</a>
+    <ul class="nav-links" id="navlinks">
+      <li><a href="#about">The Games</a></li>
+      <li><a href="#format">Format</a></li>
+      <li><a href="#event">2026 Event</a></li>
+      <li><a href="#champions">Champions</a></li>
+      <li><a href="#sponsors">Sponsors</a></li>
+      <li><a href="#enter" class="btn btn-gold"><svg width="15" height="15"><use href="#i-leaf"/></svg>Enter 2027</a></li>
+    </ul>
+    <button class="nav-toggle" id="navtoggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <svg class="hero-laurel" viewBox="0 0 400 400" aria-hidden="true"><use href="#laurel-full"/></svg>
+  <!-- laurel def -->
+  <svg width="0" height="0" style="position:absolute"><defs><g id="laurel-full">
+    <g fill="currentColor">
+      <!-- left branch -->
+      <g id="branch"><path d="M200 372 C150 350 118 300 108 244" stroke="currentColor" stroke-width="3" fill="none"/>
+        <g>
+          <ellipse cx="150" cy="330" rx="17" ry="7" transform="rotate(-38 150 330)"/>
+          <ellipse cx="134" cy="306" rx="18" ry="7.5" transform="rotate(-30 134 306)"/>
+          <ellipse cx="122" cy="280" rx="19" ry="8" transform="rotate(-22 122 280)"/>
+          <ellipse cx="114" cy="252" rx="19" ry="8" transform="rotate(-14 114 252)"/>
+          <ellipse cx="110" cy="224" rx="18" ry="7.5" transform="rotate(-6 110 224)"/>
+          <ellipse cx="172" cy="344" rx="15" ry="6.5" transform="rotate(-58 172 344)"/>
+          <ellipse cx="156" cy="320" rx="16" ry="7" transform="rotate(-52 156 320)"/>
+          <ellipse cx="142" cy="294" rx="17" ry="7.5" transform="rotate(-46 142 294)"/>
+          <ellipse cx="132" cy="266" rx="17" ry="7.5" transform="rotate(-40 132 266)"/>
+          <ellipse cx="126" cy="238" rx="16" ry="7" transform="rotate(-32 126 238)"/>
+        </g>
+      </g>
+      <use href="#branch" transform="matrix(-1 0 0 1 400 0)"/>
+    </g>
+  </g></defs></svg>
+
+  <div class="hero-inner">
+    <span class="eyebrow center hero-eyebrow">V · Fifth Annual · Est. 2021</span>
+    <h1 class="hero-title chrome">Zalympix<span class="shine" aria-hidden="true">Zalympix</span></h1>
+    <p class="hero-tag">The Grammys of Cannabis</p>
+
+    <div class="hero-meta">
+      <span><b>California</b> · Michigan · Oklahoma</span>
+      <span class="dot"></span>
+      <span>Crowning the world's best flower, genetics &amp; hash</span>
+    </div>
+
+    <div class="countdown" id="countdown" role="timer" aria-label="Countdown to next championship">
+      <span class="cd-label" id="cdlabel">Next Championship · Michigan · Sep 19</span>
+      <div class="cd-unit"><div class="cd-num" id="cd-d">00</div><div class="cd-tag">Days</div></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><div class="cd-num" id="cd-h">00</div><div class="cd-tag">Hrs</div></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><div class="cd-num" id="cd-m">00</div><div class="cd-tag">Min</div></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><div class="cd-num" id="cd-s">00</div><div class="cd-tag">Sec</div></div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#enter" class="btn btn-gold"><svg width="15" height="15"><use href="#i-leaf"/></svg>Enter the 2027 Prelims</a>
+      <a href="#champions" class="btn btn-ghost"><svg width="15" height="15"><use href="#i-trophy"/></svg>Meet the Champions</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><div class="rail"></div></div>
+</header>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track" id="mq1">
+    <span>Best Overall<i class="star">✦</i>Best Terps<i class="star">✦</i>Best Tasting<i class="star">✦</i>Heaviest Hitting<i class="star">✦</i>Best Looking<i class="star">✦</i>Gassiest<i class="star">✦</i>Most Unique<i class="star">✦</i>Best Candy<i class="star">✦</i>Best Z Hybrid<i class="star">✦</i></span>
+  </div>
+</div>
+
+<!-- ===================== SEASON PIPELINE ===================== -->
+<section class="section" style="padding-top:clamp(64px,8vw,110px)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow center">The 2026 Season</span>
+      <h2 class="section-title chrome" style="margin-top:18px">Three States. One Crown.</h2>
+      <p class="section-sub">The Zalympix runs a national circuit — each region grown, judged and celebrated on its own timeline. Here's where the season stands.</p>
+    </div>
+    <div class="pipeline">
+      <div class="stage reveal d1">
+        <span class="st-state st-done">Champions Crowned</span>
+        <h3>California</h3><div class="st-place">Los Angeles</div>
+        <div class="st-date">May 30, 2026 · 108 entries judged</div>
+        <span class="st-num">CA</span>
+      </div>
+      <div class="stage reveal d2">
+        <span class="st-state st-done">Champions Crowned</span>
+        <h3>Oklahoma</h3><div class="st-place">w/ The Bodega Boyz</div>
+        <div class="st-date">May 16, 2026 · Debut event</div>
+        <span class="st-num">OK</span>
+      </div>
+      <div class="stage reveal d3">
+        <span class="st-state st-live"><span class="st-live-dot"></span>Judging Live</span>
+        <h3>Michigan</h3><div class="st-place">w/ Exotic Matter</div>
+        <div class="st-date">Judge kits Aug 8 · Awards Sep 19, 2026</div>
+        <span class="st-num">MI</span>
+      </div>
+      <div class="stage reveal d4">
+        <span class="st-state st-open">Prelims Open</span>
+        <h3>California</h3><div class="st-place">2027 Season</div>
+        <div class="st-date">Preliminary round signup now open</div>
+        <span class="st-num">27</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><div class="num gold-text" data-count="2021" data-plain>2021</div><div class="lbl">Founded</div></div>
+      <div class="stat"><div class="num gold-text" data-count="5">0</div><div class="lbl">Years Running</div></div>
+      <div class="stat"><div class="num gold-text" data-count="3">0</div><div class="lbl">States</div></div>
+      <div class="stat"><div class="num gold-text" data-count="108">0</div><div class="lbl">2026 CA Entries</div></div>
+      <div class="stat"><div class="num gold-text" data-count="28">0</div><div class="lbl">CA Award Brands</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <span class="eyebrow">What is the Zalympix</span>
+        <h2 class="section-title" style="text-align:left;margin-top:18px"><span class="chrome">The Games of</span><br><span class="gold-text">Great Cannabis.</span></h2>
+        <p class="lead">Founded in 2021 by a close-knit crew of growers and heads, the Zalympix exists to <b>shine a light on the people who deserve it</b> — the legacy cultivators, the boutique breeders, the small-batch obsessives building the best cannabis on Earth.</p>
+        <p>What began as an invite-only night for California's most respected flower has become a national institution — a competition where entries are <b style="color:var(--gold-bright)">stripped of their branding</b> and judged blind, so the only thing that wins is the weed itself.</p>
+        <div class="pillars">
+          <div class="pillar"><svg class="ic"><use href="#i-shield"/></svg><div><h4>Judged Blind</h4><p>Every entry is anonymized — no logos, no packaging, no politics. Just the flower on its merits.</p></div></div>
+          <div class="pillar"><svg class="ic"><use href="#i-users"/></svg><div><h4>The People Decide</h4><p>Curated judge kits go to real consumers who vote, alongside a hand-picked industry panel.</p></div></div>
+          <div class="pillar"><svg class="ic"><use href="#i-clock"/></svg><div><h4>The Long Game</h4><p>120+ day cultivation windows let finalists flower fresh batches — quality over a rushed calendar.</p></div></div>
+        </div>
+      </div>
+      <div class="about-art reveal d2" aria-hidden="true">
+        <div class="ring"></div><div class="ring r2"></div>
+        <svg class="medal-lg" viewBox="0 0 240 240">
+          <defs>
+            <radialGradient id="mg" cx="42%" cy="34%" r="75%">
+              <stop offset="0%" stop-color="#fff6df"/><stop offset="34%" stop-color="#f4d47f"/>
+              <stop offset="66%" stop-color="#c79a3d"/><stop offset="100%" stop-color="#7c5c1e"/>
+            </radialGradient>
+            <linearGradient id="mgr" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#e05a8a"/><stop offset="50%" stop-color="#7b5cff"/><stop offset="100%" stop-color="#57c7f2"/>
+            </linearGradient>
+          </defs>
+          <path d="M92 40 L60 12 L86 92" fill="url(#mgr)" opacity=".85"/>
+          <path d="M148 40 L180 12 L154 92" fill="url(#mgr)" opacity=".85"/>
+          <circle cx="120" cy="150" r="74" fill="url(#mg)" stroke="#8a6a24" stroke-width="2"/>
+          <circle cx="120" cy="150" r="60" fill="none" stroke="#8a6a24" stroke-width="1.5" opacity=".6"/>
+          <path d="M120 150 m0-13 c-6 8-14 13-14 24a14 14 0 0 0 28 0c0-4-2-7-4-9 0 4-4 6-4 6 0-7 4-14 4-19s-4-2-6 0" fill="#7c5c1e" opacity=".55" transform="translate(0 8) scale(1.3) translate(-28 -46)"/>
+          <text x="120" y="162" text-anchor="middle" font-family="Haettenschweiler,Impact,sans-serif" font-size="52" fill="#6b4e16" font-style="italic">Z</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee gold" aria-hidden="true">
+  <div class="mq-track" id="mq2">
+    <span>The Grammys of Cannabis<i class="star">✦</i>Five Years Deep<i class="star">✦</i>California · Michigan · Oklahoma<i class="star">✦</i>Blind Judged<i class="star">✦</i>People's Choice<i class="star">✦</i></span>
+  </div>
+</div>
+
+<!-- ===================== FORMAT ===================== -->
+<section class="section" id="format">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow center">How A Champion Is Made</span>
+      <h2 class="section-title chrome" style="margin-top:18px">The Road to the Podium</h2>
+      <p class="section-sub">One California season, five deliberate stages. No shortcuts, no branded bias — the format is built to reward the grower, not the marketing budget.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal"><div class="tl-num">01</div><div class="tl-body">
+        <span class="when">November 2025</span><h3>The Preliminary Round</h3>
+        <p>Any licensed cultivator can enter. For the 2026 California season, <b style="color:var(--gold-bright)">108 entries</b> arrived from farms across the state — the widest, most open field the Zalympix has ever fielded.</p>
+        <span class="tag">Open to all licensed brands</span>
+      </div></div>
+      <div class="tl-item reveal"><div class="tl-num">02</div><div class="tl-body">
+        <span class="when">By December 29, 2025</span><h3>The Judges Cut</h3>
+        <p>Entries are stripped of all branding and handed to <b style="color:var(--gold-bright)">28 hand-selected industry insiders</b> — growers, breeders and connoisseurs who narrow the field to the finalists on flavor, structure and nose alone.</p>
+        <span class="tag">Blind · anonymized</span>
+      </div></div>
+      <div class="tl-item reveal"><div class="tl-num">03</div><div class="tl-body">
+        <span class="when">120+ Day Window</span><h3>Fresh Cultivation</h3>
+        <p>Finalists get a full flowering window to grow and harvest a fresh, dedicated batch for judging — no jarred-up leftovers. This is the Zalympix's signature "long game."</p>
+        <span class="tag">Freshly grown for the finals</span>
+      </div></div>
+      <div class="tl-item reveal"><div class="tl-num">04</div><div class="tl-body">
+        <span class="when">April 2026</span><h3>The People's Judging</h3>
+        <p>Curated judge kits land at retail partners statewide. <b style="color:var(--gold-bright)">Real consumers</b> smoke, score and vote — the public's palate crowns the People's Choice winners.</p>
+        <span class="tag">Judge kits at retail</span>
+      </div></div>
+      <div class="tl-item reveal"><div class="tl-num">05</div><div class="tl-body">
+        <span class="when">May 30, 2026</span><h3>The Awards Ceremony</h3>
+        <p>Los Angeles. The whole community under one roof — champions crowned, trophies lifted, and a stacked live lineup to close the season out in style.</p>
+        <span class="tag">Live in Los Angeles</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CATEGORIES ===================== -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow center">The Titles Up For Grabs</span>
+      <h2 class="section-title chrome" style="margin-top:18px">Award Categories</h2>
+      <p class="section-sub">Public voters and the industry panel each hand out their own hardware. Some titles are legendary — some are pure Zalympix.</p>
+    </div>
+    <div class="cat-grid" id="catgrid"></div>
+  </div>
+</section>
+
+<!-- ===================== EVENT 2026 ===================== -->
+<section class="section event" id="event">
+  <div class="hero-glow" aria-hidden="true" style="opacity:.5"></div>
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:56px">
+      <span class="eyebrow center">The Main Stage</span>
+      <h2 class="section-title chrome" style="margin-top:18px">2026 California Championship</h2>
+      <p class="section-sub">The industry's most prestigious night — where the season's champions are crowned and the culture comes together.</p>
+    </div>
+    <div class="event-grid">
+      <div class="event-card reveal">
+        <div class="poster">
+          <div class="kicker">Presented by Miron × Rare Candy Supply</div>
+          <div class="big chrome">2026<br>California</div>
+          <div class="sub">Zalympix Championship</div>
+        </div>
+        <div class="event-rows">
+          <div class="erow"><svg class="ic"><use href="#i-cal"/></svg><span class="k">Date</span><span class="v"><b>May 30, 2026</b></span></div>
+          <div class="erow"><svg class="ic"><use href="#i-pin"/></svg><span class="k">Location</span><span class="v">Los Angeles, California</span></div>
+          <div class="erow"><svg class="ic"><use href="#i-mic"/></svg><span class="k">Headliners</span><span class="v"><b>E-40</b> · Shoreline Mafia</span></div>
+          <div class="erow"><svg class="ic"><use href="#i-users"/></svg><span class="k">Guests</span><span class="v">Yukmouth · Yung Chowder</span></div>
+          <div class="erow"><svg class="ic"><use href="#i-trophy"/></svg><span class="k">Awards</span><span class="v">Flower &amp; Rosin championships</span></div>
+        </div>
+      </div>
+      <div class="event-copy reveal d2">
+        <h2 class="chrome">Where the<br>Culture Gathers.</h2>
+        <p>More than a competition — the Zalympix awards night is the gathering place for the California cannabis community. Growers, smokers, breeders and legends, all under one roof for the biggest celebration of craft the state throws all year.</p>
+        <p>West Coast royalty on the mic, 100+ brand activations on the floor, and the moment everyone waits for — the champions revealed live.</p>
+        <div class="lineup">
+          <span class="act head">E-40</span>
+          <span class="act head">Shoreline Mafia</span>
+          <span class="act">Yukmouth</span>
+          <span class="act">Yung Chowder</span>
+        </div>
+        <div class="xp-grid">
+          <div class="xp"><svg class="ic"><use href="#i-leaf"/></svg>100+ brand activations</div>
+          <div class="xp"><svg class="ic"><use href="#i-flame"/></svg>Live rolling stations</div>
+          <div class="xp"><svg class="ic"><use href="#i-star"/></svg>Casino-themed lounges</div>
+          <div class="xp"><svg class="ic"><use href="#i-cart"/></svg>Exclusive merch drops</div>
+          <div class="xp"><svg class="ic"><use href="#i-diamond"/></svg>Food experiences</div>
+          <div class="xp"><svg class="ic"><use href="#i-trophy"/></svg>Live awards ceremony</div>
+        </div>
+        <div class="hero-cta" style="justify-content:flex-start;margin-top:34px">
+          <a href="#enter" class="btn btn-gold"><svg width="15" height="15"><use href="#i-ticket"/></svg>Get on the List</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CHAMPIONS ===================== -->
+<section class="section" id="champions" style="background:linear-gradient(180deg,var(--void),var(--void-2),var(--void))">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow center">The Hall of Champions</span>
+      <h2 class="section-title chrome" style="margin-top:18px">Five Years of Winners</h2>
+      <p class="section-sub">Every Best Overall podium since 2021, across every Zalympix region. The strains that defined an era of American cannabis.</p>
+    </div>
+    <div class="champ-tabs reveal" role="tablist" id="champtabs">
+      <button class="ctab" role="tab" data-region="California" aria-selected="true">California</button>
+      <button class="ctab" role="tab" data-region="Michigan" aria-selected="false">Michigan</button>
+      <button class="ctab" role="tab" data-region="East Coast" aria-selected="false">East Coast</button>
+    </div>
+    <p class="champ-note reveal">Best Overall podiums · gold, silver &amp; bronze</p>
+    <div class="champ-grid" id="champgrid"></div>
+  </div>
+</section>
+
+<!-- ===================== SPONSORS ===================== -->
+<section class="section" id="sponsors">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow center">The Family</span>
+      <h2 class="section-title chrome" style="margin-top:18px">Official Sponsors &amp; Brands</h2>
+      <p class="section-sub">The competition runs on the brands who show up. From presenting partners to the deepest roster in cannabis — this is the Zalympix family.</p>
+    </div>
+    <div class="presented reveal">
+      <div class="lbl">— Presented By —</div>
+      <div class="row" id="presrow"></div>
+    </div>
+  </div>
+  <div class="sp-rows reveal" id="sprows"></div>
+</section>
+
+<!-- ===================== ZNN / PRESS ===================== -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="press-grid">
+      <div class="znn reveal">
+        <div class="hero-glow" style="opacity:.35;top:auto;bottom:-40%" aria-hidden="true"></div>
+        <svg class="ic"><use href="#i-broadcast"/></svg>
+        <h3 class="chrome">Zalympix<br>News Network</h3>
+        <p>The ZNN takes the culture beyond the ceremony — grower interviews, brand deep-dives and behind-the-scenes coverage from every corner of the Zalympix world, all season long.</p>
+        <a href="#enter" class="btn btn-ghost"><svg width="15" height="15"><use href="#i-broadcast"/></svg>Tune In</a>
+      </div>
+      <div class="press-quotes">
+        <div class="quote reveal d1"><p>"Basically the world championship of weed — but with a stacked rap lineup."</p><div class="src">— Vice</div></div>
+        <div class="quote reveal d2"><p>"The brands that stood out most were not necessarily the loudest."</p><div class="src">— Respect My Region · 2026 Recap</div></div>
+        <div class="quote reveal d3"><p>"Gucci Mane, LaRussell and E-40 headline the industry's most esteemed weed event."</p><div class="src">— GreenState</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="section final" id="enter">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <svg class="hero-laurel" viewBox="0 0 400 400" aria-hidden="true" style="opacity:.06"><use href="#laurel-full"/></svg>
+  <div class="wrap">
+    <span class="eyebrow center reveal" style="justify-content:center">Season 2027 · Now Open</span>
+    <h2 class="chrome reveal" style="margin-top:22px">Enter<br>The Games</h2>
+    <p class="reveal">Licensed cultivator? The 2027 California preliminary round is open. Get your genetics in front of the industry's toughest blind panel — and chase a title that actually means something.</p>
+    <form class="newsletter reveal" id="nlform" onsubmit="return false">
+      <input type="email" placeholder="your@brand.com" aria-label="Email" required>
+      <button type="submit" class="btn btn-gold" style="padding:15px 26px">Sign Up</button>
+    </form>
+    <p class="reveal" style="margin-top:18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--ash-dim)">Prelim signups · sponsorship · newsletter — all in one place.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="b chrome">Zalympix</div>
+        <p>The Grammys of Cannabis. Crowning the world's best flower, genetics and hash since 2021 — across California, Michigan and Oklahoma.</p>
+      </div>
+      <div class="foot-col">
+        <h5>The Games</h5>
+        <a href="#about">What is Zalympix</a>
+        <a href="#format">The Format</a>
+        <a href="#champions">Hall of Champions</a>
+        <a href="#event">2026 Event</a>
+      </div>
+      <div class="foot-col">
+        <h5>Regions</h5>
+        <a href="#event">California</a>
+        <a href="#champions">Michigan</a>
+        <a href="#sponsors">Oklahoma</a>
+        <a href="#enter">2027 Prelims</a>
+      </div>
+      <div class="foot-col">
+        <h5>Get Involved</h5>
+        <a href="#enter">Enter a Brand</a>
+        <a href="#enter">Sponsorship</a>
+        <a href="#enter">Newsletter</a>
+        <a href="#event">Press &amp; ZNN</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 Zalympix. All rights reserved.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
+        <a href="#" aria-label="X"><svg><use href="#i-x"/></svg></a>
+        <a href="#" aria-label="Website"><svg><use href="#i-globe"/></svg></a>
+      </div>
+    </div>
+    <p class="disclaimer">For use by adults 21+. Cannabis has intoxicating effects. Keep out of reach of children and pets. This is a concept redesign celebrating the Zalympix competition — event details compiled from public sources.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  /* ---------- NAV ---------- */
+  var nav=document.getElementById("nav");
+  var onScroll=function(){nav.classList.toggle("scrolled",window.scrollY>40);};
+  onScroll();window.addEventListener("scroll",onScroll,{passive:true});
+  var tog=document.getElementById("navtoggle"),links=document.getElementById("navlinks");
+  tog.addEventListener("click",function(){
+    var open=links.classList.toggle("open");
+    tog.setAttribute("aria-expanded",open);
+  });
+  links.addEventListener("click",function(e){if(e.target.closest("a"))links.classList.remove("open");});
+
+  /* ---------- REVEAL ---------- */
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target);}});
+  },{threshold:.12,rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+
+  /* ---------- COUNTDOWN (next live event) ---------- */
+  var target=new Date("2026-09-19T18:00:00-07:00").getTime();
+  var el={d:document.getElementById("cd-d"),h:document.getElementById("cd-h"),m:document.getElementById("cd-m"),s:document.getElementById("cd-s")};
+  var pad=function(n){return String(n).padStart(2,"0");};
+  function tick(){
+    var diff=target-Date.now();
+    if(diff<=0){el.d.textContent="00";el.h.textContent="00";el.m.textContent="00";el.s.textContent="00";
+      document.getElementById("cdlabel").textContent="Michigan Championship · Live Now";return;}
+    var d=Math.floor(diff/864e5),h=Math.floor(diff%864e5/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1e3);
+    el.d.textContent=pad(d);el.h.textContent=pad(h);el.m.textContent=pad(m);el.s.textContent=pad(s);
+  }
+  tick();setInterval(tick,1000);
+
+  /* ---------- STAT COUNTERS ---------- */
+  var counted=false;
+  var statObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting&&!counted){counted=true;
+        document.querySelectorAll("[data-count]").forEach(function(node){
+          if(node.hasAttribute("data-plain")){node.textContent=node.getAttribute("data-count");return;}
+          var end=+node.getAttribute("data-count"),dur=1400,t0=null;
+          function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/dur,1);var e=1-Math.pow(1-p,3);
+            node.textContent=Math.round(end*e);if(p<1)requestAnimationFrame(step);else node.textContent=end;}
+          if(reduce){node.textContent=end;}else{requestAnimationFrame(step);}
+        });
+      }
+    });
+  },{threshold:.4});
+  var statsEl=document.querySelector(".stats");if(statsEl)statObs.observe(statsEl);
+
+  /* ---------- CATEGORIES ---------- */
+  var cats=[
+    {t:"Best Overall",ic:"i-trophy",d:"The one that matters. The single best entry in the field, full stop.",b:"Public + Panel"},
+    {t:"Best Tasting",ic:"i-candy",d:"Flavor on the exhale — the entry that lingers longest and cleanest on the palate.",b:"Public + Panel"},
+    {t:"Best Terps",ic:"i-diamond",d:"The loudest, most complex nose in the room. Terpene royalty.",b:"Public + Panel"},
+    {t:"Heaviest Hitting",ic:"i-bolt",d:"Pure potency. The cut that puts you exactly where you asked to go.",b:"Public"},
+    {t:"Best Looking",ic:"i-eye",d:"Bag appeal for days — structure, trichome frost, color and cure.",b:"Public"},
+    {t:"Gassiest",ic:"i-flame",d:"That unmistakable fuel. The funk that fills a room the second the jar cracks.",b:"Public"},
+    {t:"Most Unique",ic:"i-star",d:"The wildcard — a profile nobody saw coming and nobody forgot.",b:"Public + Panel"},
+    {t:"Best Candy",ic:"i-drop",d:"Sweet, dessert-forward flavor bombs. An industry-panel specialty.",b:"Panel"},
+    {t:"Best Z / Z Hybrid",ic:"i-leaf",d:"A category all its own — the finest expression of the Zkittlez lineage.",b:"Panel"}
+  ];
+  var cg=document.getElementById("catgrid");
+  cats.forEach(function(c,i){
+    var d=document.createElement("div");
+    d.className="cat reveal"+(c.b==="Panel"?" industry":"")+(i%3===1?" d1":i%3===2?" d2":"");
+    d.innerHTML='<span class="badge">'+c.b+'</span><svg class="ic"><use href="#'+c.ic+'"/></svg><h3>'+c.t+'</h3><p>'+c.d+'</p>';
+    cg.appendChild(d);io.observe(d);
+  });
+
+  /* ---------- CHAMPIONS DATA ---------- */
+  var champs={
+    "California":[
+      {title:"2025 Flower",div:"People's Choice",p:[["LA Family Farms","Zamosa"],["Angel City Farmers","Ether"],["Bosky Genetics","Champu"]],
+        specials:[["Heaviest Hitting","Nameless · Mega Wellness OG"],["Best Looking","Poundcakes · Double Bubble"],["Most Unique","Hall of Flame · Zours"]]},
+      {title:"2025 Rosin",div:"Solventless",p:[["Beyond Organics","Beyond Z"],["Quality Squishes","Strawburst"],["Swollen Solventless","Mello Nella"]],
+        specials:[["Best Tasting","Beyond Organics · Beyond Z"],["Most Unique","Dablife · Cantaloupe"]]},
+      {title:"2023 Flower",div:"Championship",p:[["THE Tenco × Zushi","Blue Zushi"],["Limited Trees × Flavor Designer","Versace"],["Alien Labs","Zkittlez"]],
+        specials:[["Best Looking","Maven Genetics · French Laundry"],["Gassiest","Kush Co. · Soup Power OG"]]},
+      {title:"2022 Flower",div:"Championship",p:[["DEO Farms × Wizard Trees","Zoap"],["THE Tenco × Zushi","Blue Zushi"],["Blueprint","Triple Lindy"]],
+        specials:[["Best Looking","Fiore × Serge · Cereal a la Mode"],["Heaviest Hitting","Blueprint · Triple Lindy"]]},
+      {title:"2021 Flower",div:"Winter",p:[["Blueprint","Triple Lindy"],["Fiore × Serge","Pomelo Anderson"],["Grandiflora","E85"]],
+        specials:[["Best Terps","Fiore · Pomelo Anderson"],["Gassiest","Grandiflora · E85"]]},
+      {title:"2021 Flower",div:"Summer",p:[["THE Tenco × Zushi","Blue Zushi"],["DEO Farms × Wizard Trees","Zoap"],["Alien Labs","Biskante"]],
+        specials:[["Best Terps","Alien Labs · Biskante"],["Heaviest Hitting","Low Key Farms · Heavy Fog #4"]]}
+    ],
+    "Michigan":[
+      {title:"2025 Flower",div:"Best Overall",p:[["Hytek","Lantz"],["Growing Pains","Honey Banana"],["Great Lakes Kush","Rainbow Beltz 3.0"]],
+        specials:[["Best Candy","Tip Top Crop · Cosmic Runtz"],["Gassiest","Premier 517 · 517 Headband"]]},
+      {title:"2025 Rosin",div:"Solventless",p:[["Rkive","Banana Peelz"],["Organic Mechanic × Alpha Buddz","White Gummy Bear"],["Peninsula Gardens","Plan Z"]],
+        specials:[["Heaviest Hitting","MI Loud · Kota's Kush"],["Best Candy","Peninsula Gardens · Plan Z"]]},
+      {title:"2024 Flower",div:"Best Overall",p:[["Voyage Bloom","Slurmz"],["Fractal","Jealousy F2"],["Seed Junky","Magic Marker"]],
+        specials:[["Best Looking","Clout King · Wagyu"],["Gassiest","Premier Gardens · Spartan OG"]]},
+      {title:"2024 Rosin",div:"Solventless",p:[["Known × Alpha Buddz","Gummy Bear"],["Organic Mechanic × Peninsula","Plan Z"],["Rkive","Sudz + Orange Mintz"]],
+        specials:[["Best Looking","North Coast · Lemon Vuitton"],["Best Terps","Element × Tip Top · Space Guavaz"]]},
+      {title:"2023 Flower",div:"Best Overall",p:[["Rkive","Candy Fumes"],["Peninsula Gardens","Sherb Pie"],["Light Sky Farms","Titty Sprinkles"]],
+        specials:[["Best Terps","Light Sky Farms · Titty Sprinkles"],["Best Looking","Ghostbudsters · Halle Berry #1"]]},
+      {title:"2022 Flower",div:"Best Overall",p:[["Michigrown","Gelatti"],["Gans","Larry Legend"],["Exotic Matter","Gelonade"]],
+        specials:[["Best Tasting","Peninsula Gardens · EPBC"],["Heaviest Hitting","Hytek · Headstash"]]}
+    ],
+    "East Coast":[
+      {title:"2023 Flower",div:"Best Overall",p:[["Gotti","Zkittlez × Zoap"],["Maine Trees","Blue Lobster"],["Epiphany","Apples & Bananas"]],
+        specials:[["Best Terps","Maine Trees · Blue Lobster"],["Heaviest Hitting","Marijuantauk · Cap Junky"]]}
+    ]
+  };
+  var grid=document.getElementById("champgrid");
+  /* ---------- BRAND MARK GENERATOR (stylized monogram emblems) ---------- */
+  var _bmc=0;
+  function bmInitials(name){
+    var w=name.replace(/[^A-Za-z0-9 ]/g," ").split(/\s+/).filter(Boolean);
+    var s=w.length>=2?(w[0].charAt(0)+w[1].charAt(0)):name.replace(/[^A-Za-z0-9]/g,"").slice(0,2);
+    return s.toUpperCase();
+  }
+  function bmHash(s){var h=0;for(var k=0;k<s.length;k++){h=(h*31+s.charCodeAt(k))>>>0;}return h;}
+  function brandMark(name,i,tint){
+    var pal=tint==="silver"?["#e8eaf1","#a9adba","#20222b"]:tint==="bronze"?["#eab389","#b06a3c","#2a1608"]:["#f6dd93","#c79a3d","#241a04"];
+    var ini=bmInitials(name),v=((i%6)+6)%6,gid="bm"+(_bmc++);
+    var lit=(v===0||v===5)?pal[2]:pal[0];
+    var t='<text x="24" y="32" text-anchor="middle" font-family="Haettenschweiler,Impact,sans-serif" font-style="italic" font-size="'+(ini.length>2?15:20)+'" fill="'+lit+'">'+ini+'</text>';
+    var defs='<defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+pal[0]+'"/><stop offset="1" stop-color="'+pal[1]+'"/></linearGradient></defs>';
+    var b;
+    if(v===0)b='<rect x="3" y="3" width="42" height="42" rx="11" fill="url(#'+gid+')"/>';
+    else if(v===1)b='<circle cx="24" cy="24" r="20" fill="#0e0b13" stroke="url(#'+gid+')" stroke-width="2.6"/>';
+    else if(v===2)b='<path d="M24 4 42 10V24C42 34 34 41 24 44 14 41 6 34 6 24V10Z" fill="#0e0b13" stroke="url(#'+gid+')" stroke-width="2.4"/>';
+    else if(v===3)b='<path d="M24 4 41 14V34L24 44 7 34V14Z" fill="#0e0b13" stroke="url(#'+gid+')" stroke-width="2.4"/>';
+    else if(v===4)b='<rect x="10" y="10" width="28" height="28" rx="4" transform="rotate(45 24 24)" fill="#0e0b13" stroke="url(#'+gid+')" stroke-width="2.4"/>';
+    else b='<circle cx="24" cy="24" r="20" fill="url(#'+gid+')"/>';
+    return '<svg viewBox="0 0 48 48" width="100%" height="100%" aria-hidden="true">'+defs+b+t+'</svg>';
+  }
+  function render(region){
+    grid.innerHTML="";
+    champs[region].forEach(function(c,idx){
+      var card=document.createElement("div");
+      card.className="champ-card reveal"+(idx%2?" d1":"");
+      var pod=c.p.map(function(row,i){
+        var tint=i===0?"gold":i===1?"silver":"bronze";
+        return '<div class="place p'+(i+1)+'"><span class="bm">'+brandMark(row[0],bmHash(row[0])%6,tint)+'</span>'+
+          '<div class="pinfo"><div class="brand">'+row[0]+'</div><div class="strain">'+row[1]+'</div></div>'+
+          '<span class="rankpill">'+(i+1)+'</span></div>';
+      }).join("");
+      var spec=c.specials?'<div class="cc-specials">'+c.specials.map(function(s){
+        return '<div class="spec"><span class="sk">'+s[0]+'</span><span class="sv"><b>'+s[1]+'</b></span></div>';}).join("")+'</div>':"";
+      card.innerHTML='<div class="cc-head"><div class="cc-title">'+c.title+'</div><div class="cc-div">'+c.div+'</div></div>'+
+        '<div class="podium">'+pod+'</div>'+spec;
+      grid.appendChild(card);io.observe(card);
+    });
+  }
+  render("California");
+  document.getElementById("champtabs").addEventListener("click",function(e){
+    var b=e.target.closest(".ctab");if(!b)return;
+    this.querySelectorAll(".ctab").forEach(function(t){t.setAttribute("aria-selected","false");});
+    b.setAttribute("aria-selected","true");render(b.getAttribute("data-region"));
+  });
+
+  /* ---------- SPONSOR WALL ---------- */
+  var brands=["Jungle Boys","Seed Junky","Blueprint","Alien Labs","Grandiflora","Wizard Trees","LA Family Farms","Ball Family Farms","Beard Bros Pharms","Zushi","Exotic Matter","Gotti","Hall of Flame","Nameless","Preferred Gardens","Bosky Genetics","Foreign Genetics","Maven Genetics","Poundcakes","Angel City Farmers","Moon Valley","High Tolerance","818 Brands","Bodega Boyz","Cannabis Brothers","Gas Up Society","First Smoke of the Day","Hash House","QC Farms","CGO","Green Boyz","Gremlin","Grove Bags","High Mart","Legion of Dank","Muha Meds","Parlay","Push","Potions","Sluggers Hit","Smackers","Sticker Farmer","Street Kings","Tons of Exotics","Umami Seed Co","Up Hill","Vital Garden Supply","Wizard Trees","93 Supreme","Always Faded","Bishop Boys","Burning Bush","Bomb Popz","Dank Mob","De La Creme","Diamond Fire","Dime","Don Merced","Faven","Frost","LA Drank","LAX","Mr. Burns","Yessirski","Zalix"];
+  var rows=[[],[],[]];
+  brands.forEach(function(b,i){rows[i%3].push(b);});
+  var wrap=document.getElementById("sprows");
+  rows.forEach(function(list,ri){
+    var row=document.createElement("div");
+    row.className="sp-row"+(ri===1?" rev":ri===2?" slow":"");
+    var track=document.createElement("div");track.className="sp-track";
+    var html=list.map(function(b){return '<span class="chip"><span class="bm">'+brandMark(b,brands.indexOf(b),null)+'</span>'+b+'</span>';}).join("");
+    track.innerHTML=html+html; /* duplicate for seamless loop */
+    row.appendChild(track);wrap.appendChild(row);
+  });
+
+  /* ---------- PRESENTED BY (emblem lockups) ---------- */
+  var presRow=document.getElementById("presrow");
+  if(presRow){
+    var pres=["Miron","Rare Candy Supply","My Butler AL","Zig-Zag"];
+    presRow.innerHTML=pres.map(function(n,pi){return '<span class="p"><span class="bm">'+brandMark(n,pi,null)+'</span><span class="chrome">'+n+'</span></span>';}).join("");
+  }
+
+  /* ---------- MARQUEE SEAMLESS (duplicate content) ---------- */
+  ["mq1","mq2"].forEach(function(id){
+    var t=document.getElementById(id);if(t)t.innerHTML+=t.innerHTML;
+  });
+
+  /* ---------- NEWSLETTER ---------- */
+  var f=document.getElementById("nlform");
+  if(f)f.addEventListener("submit",function(){
+    var i=f.querySelector("input");if(!i.value)return;
+    var btn=f.querySelector("button");btn.textContent="You're In ✦";btn.style.filter="brightness(1.1)";i.value="";i.disabled=true;
+    setTimeout(function(){btn.textContent="Sign Up";i.disabled=false;},2600);
+  });
+
+  /* ---------- EMBERS CANVAS ---------- */
+  if(!reduce){
+    var cv=document.getElementById("embers"),ctx=cv.getContext("2d"),parts=[],W,H,DPR=Math.min(window.devicePixelRatio||1,2);
+    function resize(){var h=cv.parentElement;W=h.offsetWidth;H=h.offsetHeight;cv.width=W*DPR;cv.height=H*DPR;cv.style.width=W+"px";cv.style.height=H+"px";ctx.setTransform(DPR,0,0,DPR,0,0);}
+    resize();window.addEventListener("resize",resize);
+    var N=Math.min(56,Math.floor(W/26));
+    function mk(){return {x:Math.random()*W,y:H+Math.random()*H,r:Math.random()*1.8+.4,s:Math.random()*.5+.15,d:Math.random()*.6-.3,o:Math.random()*.5+.2,tw:Math.random()*6.28};}
+    for(var i=0;i<N;i++){parts.push(mk());}
+    function loop(){
+      ctx.clearRect(0,0,W,H);
+      for(var i=0;i<parts.length;i++){var p=parts[i];
+        p.y-=p.s;p.x+=p.d*.4;p.tw+=.03;
+        if(p.y<-10){parts[i]=mk();parts[i].y=H+10;continue;}
+        var fl=(Math.sin(p.tw)*.35+.65)*p.o;
+        var g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
+        g.addColorStop(0,"rgba(247,224,163,"+fl+")");g.addColorStop(.5,"rgba(233,196,106,"+(fl*.4)+")");g.addColorStop(1,"rgba(233,196,106,0)");
+        ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r*4,0,6.28);ctx.fill();
+      }
+      requestAnimationFrame(loop);
+    }
+    loop();
+  }
+})();
+</script>
+</body>
+</html>
